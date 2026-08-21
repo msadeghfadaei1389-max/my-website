@@ -5,699 +5,451 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>محمد صادق | وب‌سایت شخصی و فروشگاه</title>
+    <title>قرآن کریم | تلاوت، ترجمه و جستجو</title>
 
-    <link rel="stylesheet" href="101.css">
+    <meta
+        name="description"
+        content="قرآن کریم با امکان جستجوی سوره و آیه، ترجمه، صوت قاری، نشانه‌گذاری و ادامه مطالعه."
+    >
+
+    <link rel="stylesheet" href="200.css">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Vazirmatn:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
 </head>
 
 <body>
 
-    <header>
+<header class="header">
 
-        <div class="logo">
-            <div class="logo-icon">م</div>
-            <span>محمد صادق</span>
-        </div>
+    <div class="header-inner">
 
+        <a href="#" class="brand">
+            <span class="brand-icon">☾</span>
 
-        <button
-            class="menu-btn"
-            id="menuBtn"
-            type="button">
-
-            ☰
-
-        </button>
+            <div>
+                <strong>قرآن کریم</strong>
+                <small>قرائت و تدبر</small>
+            </div>
+        </a>
 
 
-        <nav id="navMenu">
+        <nav class="nav">
 
             <a href="#home">خانه</a>
-            <a href="#services">خدمات</a>
-            <a href="#shop">فروشگاه</a>
-            <a href="#contact">تماس</a>
+            <a href="#surahs">سوره‌ها</a>
+            <a href="#bookmarks">نشان‌شده‌ها</a>
 
         </nav>
 
 
-        <button
-            class="cart-button"
-            id="cartButton"
-            type="button">
+        <div class="header-actions">
 
-            🛒
+            <button
+                id="themeButton"
+                class="icon-button"
+                type="button"
+                aria-label="تغییر حالت شب">
 
-            <span
-                class="cart-count"
-                id="cartCount">
+                🌙
 
-                0
+            </button>
 
+            <button
+                id="menuButton"
+                class="menu-button"
+                type="button"
+                aria-label="منو">
+
+                ☰
+
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<main>
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <span class="hero-badge">
+            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+        </span>
+
+        <h1>
+            قرآن کریم
+        </h1>
+
+        <p>
+            بخوان، گوش بده، جستجو کن و با آیات قرآن همراه باش.
+        </p>
+
+
+        <div class="search-box">
+
+            <span>🔎</span>
+
+            <input
+                id="searchInput"
+                type="search"
+                placeholder="نام سوره یا شماره آیه را جستجو کنید..."
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <div class="quick-actions">
+
+            <button
+                id="continueButton"
+                class="quick-button primary"
+                type="button">
+
+                ▶ ادامه مطالعه
+
+            </button>
+
+            <button
+                id="randomButton"
+                class="quick-button"
+                type="button">
+
+                ✨ آیه تصادفی
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SURAH LIST ================= -->
+
+<section
+    class="section"
+    id="surahs">
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="section-label">
+                قرآن کریم
             </span>
-
-        </button>
-
-    </header>
-
-
-    <main>
-
-        <!-- خانه -->
-
-        <section
-            class="hero"
-            id="home">
-
-            <div class="hero-text">
-
-                <span class="welcome">
-                    به وب‌سایت من خوش آمدید 👋
-                </span>
-
-
-                <h1>
-
-                    سلام، من
-
-                    <span>
-                        محمد صادق
-                    </span>
-
-                    هستم
-
-                </h1>
-
-
-                <p>
-
-                    به دنیای من خوش آمدید؛
-                    جایی برای یادگیری، خلاقیت
-                    و ساختن ایده‌های جدید.
-
-                </p>
-
-
-                <div class="buttons">
-
-                    <button
-                        class="primary"
-                        id="aboutButton"
-                        type="button">
-
-                        درباره من
-
-                    </button>
-
-
-                    <a
-                        href="#shop"
-                        class="secondary">
-
-                        مشاهده فروشگاه
-
-                    </a>
-
-                </div>
-
-            </div>
-
-
-            <div class="profile-card">
-
-                <div class="avatar">
-                    م
-                </div>
-
-
-                <h2>
-                    محمد صادق
-                </h2>
-
-
-                <p>
-                    طراح و علاقه‌مند به وب
-                </p>
-
-
-                <div class="skills">
-
-                    <span>HTML</span>
-                    <span>CSS</span>
-                    <span>JavaScript</span>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- خدمات -->
-
-        <section
-            class="section-title"
-            id="services">
-
-            <span class="section-tag">
-                خدمات من
-            </span>
-
 
             <h2>
-                طراحی و
-                <span>خلاقیت</span>
+                فهرست سوره‌ها
             </h2>
 
-
-            <p>
-                روی هر بخش کلیک کنید.
-            </p>
-
-        </section>
-
-
-        <section class="cards">
-
-            <div
-                class="card"
-                data-title="طراحی سایت">
-
-                <div class="icon">
-                    🌐
-                </div>
-
-                <h3>
-                    طراحی سایت
-                </h3>
-
-                <p>
-                    طراحی سایت‌های شخصی،
-                    شرکتی و فروشگاهی.
-                </p>
-
-            </div>
-
-
-            <div
-                class="card"
-                data-title="فایل و پروژه">
-
-                <div class="icon">
-                    📁
-                </div>
-
-                <h3>
-                    فایل و پروژه
-                </h3>
-
-                <p>
-                    فایل‌ها و پروژه‌های آماده
-                    HTML، CSS و JavaScript.
-                </p>
-
-            </div>
-
-
-            <div
-                class="card"
-                data-title="ارتباط">
-
-                <div class="icon">
-                    💬
-                </div>
-
-                <h3>
-                    ارتباط با من
-                </h3>
-
-                <p>
-                    برای ارتباط می‌توانید
-                    از تلگرام و ایتا استفاده کنید.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- فروشگاه -->
-
-        <section
-            class="shop-section"
-            id="shop">
-
-            <div class="section-title">
-
-                <span class="section-tag">
-                    فروشگاه
-                </span>
-
-
-                <h2>
-
-                    محصولات و
-                    <span>خدمات</span>
-
-                </h2>
-
-
-                <p>
-
-                    محصول یا خدمت موردنظر
-                    خود را انتخاب کنید.
-
-                </p>
-
-            </div>
-
-
-            <div
-                class="products"
-                id="products">
-
-
-                <article class="product-card">
-
-                    <div class="product-icon">
-                        🌐
-                    </div>
-
-
-                    <span class="product-type">
-                        خدمات وب
-                    </span>
-
-
-                    <h3>
-                        طراحی سایت شخصی
-                    </h3>
-
-
-                    <p>
-
-                        طراحی یک سایت شخصی
-                        زیبا و واکنش‌گرا.
-
-                    </p>
-
-
-                    <div class="price">
-                        ۱,۵۰۰,۰۰۰ تومان
-                    </div>
-
-
-                    <button
-                        class="add-to-cart"
-                        type="button"
-
-                        data-id="personal"
-
-                        data-name="طراحی سایت شخصی"
-
-                        data-price="1500000">
-
-                        افزودن به سبد 🛒
-
-                    </button>
-
-                </article>
-
-
-                <article class="product-card">
-
-                    <div class="product-icon">
-                        🛒
-                    </div>
-
-
-                    <span class="product-type">
-                        خدمات وب
-                    </span>
-
-
-                    <h3>
-                        طراحی سایت فروشگاهی
-                    </h3>
-
-
-                    <p>
-
-                        طراحی فروشگاه اینترنتی
-                        با امکانات حرفه‌ای.
-
-                    </p>
-
-
-                    <div class="price">
-                        ۳,۰۰۰,۰۰۰ تومان
-                    </div>
-
-
-                    <button
-                        class="add-to-cart"
-                        type="button"
-
-                        data-id="store"
-
-                        data-name="طراحی سایت فروشگاهی"
-
-                        data-price="3000000">
-
-                        افزودن به سبد 🛒
-
-                    </button>
-
-                </article>
-
-
-                <article class="product-card">
-
-                    <div class="product-icon">
-                        💻
-                    </div>
-
-
-                    <span class="product-type">
-                        فایل و پروژه
-                    </span>
-
-
-                    <h3>
-                        پروژه HTML و CSS
-                    </h3>
-
-
-                    <p>
-
-                        پروژه آماده و قابل
-                        ویرایش HTML و CSS.
-
-                    </p>
-
-
-                    <div class="price">
-                        ۲۰۰,۰۰۰ تومان
-                    </div>
-
-
-                    <button
-                        class="add-to-cart"
-                        type="button"
-
-                        data-id="htmlcss"
-
-                        data-name="پروژه HTML و CSS"
-
-                        data-price="200000">
-
-                        افزودن به سبد 🛒
-
-                    </button>
-
-                </article>
-
-
-                <article class="product-card">
-
-                    <div class="product-icon">
-                        📦
-                    </div>
-
-
-                    <span class="product-type">
-                        فایل
-                    </span>
-
-
-                    <h3>
-                        فایل آماده
-                    </h3>
-
-
-                    <p>
-
-                        مجموعه فایل‌های آماده
-                        برای استفاده و ویرایش.
-
-                    </p>
-
-
-                    <div class="price">
-                        ۱۰۰,۰۰۰ تومان
-                    </div>
-
-
-                    <button
-                        class="add-to-cart"
-                        type="button"
-
-                        data-id="file"
-
-                        data-name="فایل آماده"
-
-                        data-price="100000">
-
-                        افزودن به سبد 🛒
-
-                    </button>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- ارتباط -->
-
-        <section
-            class="contact-section"
-            id="contact">
-
-            <div class="section-title">
-
-                <span class="section-tag">
-                    ارتباط
-                </span>
-
-
-                <h2>
-                    با من در ارتباط باشید
-                </h2>
-
-            </div>
-
-
-            <div class="contact-links">
-
-
-                <a
-                    href="https://t.me/mohammadsadegh_fadaei"
-                    target="_blank"
-                    class="contact-link">
-
-                    ✈️ تلگرام
-
-                </a>
-
-
-                <a
-                    href="https://eitaa.com/mohammadsadeghfadaei1389"
-                    target="_blank"
-                    class="contact-link">
-
-                    🟢 ایتا
-
-                </a>
-
-
-                <a
-                    href="tel:09364028530"
-                    class="contact-link">
-
-                    📱 09364028530
-
-                </a>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- سبد خرید -->
-
-    <div
-        class="cart-overlay"
-        id="cartOverlay">
-
-        <aside
-            class="cart-panel"
-            id="cartPanel">
-
-            <div class="cart-header">
-
-                <h2>
-                    🛒 سبد خرید
-                </h2>
-
-
-                <button
-                    id="closeCart"
-                    type="button">
-
-                    ×
-
-                </button>
-
-            </div>
-
-
-            <div
-                id="cartItems"
-                class="cart-items">
-
-                <p class="empty-cart">
-
-                    سبد خرید شما خالی است.
-
-                </p>
-
-            </div>
-
-
-            <div class="cart-footer">
-
-                <div class="total">
-
-                    <span>
-                        مبلغ کل:
-                    </span>
-
-
-                    <strong
-                        id="cartTotal">
-
-                        ۰ تومان
-
-                    </strong>
-
-                </div>
-
-
-                <button
-                    id="checkoutButton"
-                    type="button"
-                    class="checkout-button">
-
-                    ادامه و ثبت سفارش
-
-                </button>
-
-            </div>
-
-        </aside>
+        </div>
+
+        <span
+            id="surahCount"
+            class="result-count">
+            ۱۱۴ سوره
+        </span>
 
     </div>
 
 
-    <!-- فرم ثبت سفارش -->
+    <div
+        id="surahGrid"
+        class="surah-grid">
+
+    </div>
+
 
     <div
-        class="checkout-overlay"
-        id="checkoutOverlay">
+        id="noResults"
+        class="no-results hidden">
 
-        <div class="checkout-box">
+        <div>🔎</div>
 
-            <button
-                class="close-checkout"
-                id="closeCheckout"
-                type="button">
+        <h3>
+            چیزی پیدا نشد
+        </h3>
 
-                ×
+        <p>
+            نام یا شماره سوره را بررسی کنید.
+        </p>
 
-            </button>
+    </div>
 
+</section>
+
+
+<!-- ================= BOOKMARKS ================= -->
+
+<section
+    class="section bookmarks-section"
+    id="bookmarks">
+
+    <div class="section-heading">
+
+        <div>
+
+            <span class="section-label">
+                ذخیره‌ها
+            </span>
 
             <h2>
-                🧾 تکمیل سفارش
+                آیات نشان‌شده
             </h2>
-
-
-            <p>
-                اطلاعات خود را وارد کنید.
-            </p>
-
-
-            <form
-                id="checkoutForm">
-
-                <input
-                    id="customerName"
-                    type="text"
-
-                    placeholder="نام و نام خانوادگی"
-
-                    required>
-
-
-                <input
-                    id="customerPhone"
-                    type="tel"
-
-                    placeholder="شماره تلفن"
-
-                    required>
-
-
-                <input
-                    id="customerEmail"
-                    type="email"
-
-                    placeholder="ایمیل (اختیاری)">
-
-
-                <button
-                    type="submit"
-                    class="order-button">
-
-                    ثبت سفارش
-
-                </button>
-
-            </form>
 
         </div>
 
     </div>
 
 
-    <!-- پیام -->
-
     <div
-        class="toast"
-        id="toast">
+        id="bookmarkList"
+        class="bookmark-list">
 
     </div>
 
-
-    <footer>
-
-        <h3>
-            محمد صادق
-        </h3>
+</section>
 
 
-        <p>
-            © 2026 تمامی حقوق محفوظ است.
+</main>
+
+
+<!-- ================= SURAH MODAL ================= -->
+
+<div
+    id="surahModal"
+    class="modal">
+
+    <div class="modal-box surah-modal-box">
+
+        <button
+            id="closeSurah"
+            class="close-button"
+            type="button">
+
+            ×
+
+        </button>
+
+
+        <div class="surah-header">
+
+            <div class="surah-title">
+
+                <span
+                    id="modalSurahNumber"
+                    class="surah-number-large">
+                    ۱
+                </span>
+
+                <div>
+
+                    <h2 id="modalSurahName">
+                        سوره
+                    </h2>
+
+                    <p id="modalSurahInfo">
+                        در حال بارگذاری...
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="surah-tools">
+
+                <select
+                    id="translationSelect"
+                    aria-label="انتخاب مترجم">
+
+                    <option value="">
+                        بدون ترجمه
+                    </option>
+
+                    <option value="fa.makarem">
+                        ترجمه مکارم شیرازی
+                    </option>
+
+                    <option value="fa.ansarian">
+                        ترجمه حسین انصاریان
+                    </option>
+
+                </select>
+
+
+                <button
+                    id="surahAudioButton"
+                    class="audio-button"
+                    type="button">
+
+                    🎧 پخش سوره
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="surahLoading"
+            class="loading">
+
+            <div class="spinner"></div>
+
+            <p>
+                در حال دریافت آیات...
+            </p>
+
+        </div>
+
+
+        <div
+            id="ayahContainer"
+            class="ayah-container">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= AYAH SEARCH MODAL ================= -->
+
+<div
+    id="searchModal"
+    class="modal">
+
+    <div class="modal-box search-modal-box">
+
+        <button
+            id="closeSearch"
+            class="close-button"
+            type="button">
+
+            ×
+
+        </button>
+
+
+        <div class="modal-title">
+
+            <span class="section-label">
+                جستجو
+            </span>
+
+            <h2>
+                نتایج جستجوی آیات
+            </h2>
+
+            <p>
+                عبارت موردنظر خود را در قرآن پیدا کنید.
+            </p>
+
+        </div>
+
+
+        <div class="ayah-search">
+
+            <input
+                id="ayahSearchInput"
+                type="search"
+                placeholder="مثلاً: الله، نماز، صبر..."
+            >
+
+            <button
+                id="ayahSearchButton"
+                type="button">
+
+                جستجو
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="searchResults"
+            class="search-results">
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= CONTINUE MODAL ================= -->
+
+<div
+    id="continueModal"
+    class="modal">
+
+    <div class="modal-box small-modal">
+
+        <button
+            id="closeContinue"
+            class="close-button"
+            type="button">
+
+            ×
+
+        </button>
+
+
+        <div class="continue-icon">
+            ▶
+        </div>
+
+
+        <h2>
+            ادامه مطالعه
+        </h2>
+
+
+        <p id="continueText">
+            آخرین آیه‌ای ذخیره نشده است.
         </p>
 
-    </footer>
+
+        <button
+            id="openContinue"
+            class="main-button"
+            type="button">
+
+            باز کردن آیه
+
+        </button>
+
+    </div>
+
+</div>
 
 
-    <script src="103.js"></script>
+<!-- ================= TOAST ================= -->
+
+<div
+    id="toast"
+    class="toast">
+
+</div>
+
+
+<script src="201.js"></script>
 
 </body>
-
 </html>
