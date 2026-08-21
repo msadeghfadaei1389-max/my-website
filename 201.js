@@ -1,536 +1,327 @@
+"use strict";
+
+
+/* =========================
+   تنظیمات API
+========================= */
+
+const API = "https://api.alquran.cloud/v1";
+
+const AUDIO =
+    "https://cdn.islamic.network/quran/audio/64/ar.alafasy";
+
+
+/* =========================
+   اطلاعات سوره‌ها
+========================= */
+
+const surahs = [
+    ["الفاتحة","الفاتحة",7,"مکی"],
+    ["البقرة","البقرة",286,"مدنی"],
+    ["آل عمران","آل عمران",200,"مدنی"],
+    ["النساء","النساء",176,"مدنی"],
+    ["المائدة","المائدة",120,"مدنی"],
+    ["الأنعام","الأنعام",165,"مکی"],
+    ["الأعراف","الأعراف",206,"مکی"],
+    ["الأنفال","الأنفال",75,"مدنی"],
+    ["التوبة","التوبة",129,"مدنی"],
+    ["يونس","يونس",109,"مکی"],
+    ["هود","هود",123,"مکی"],
+    ["يوسف","يوسف",111,"مکی"],
+    ["الرعد","الرعد",43,"مدنی"],
+    ["إبراهيم","ابراهيم",52,"مکی"],
+    ["الحجر","الحجر",99,"مکی"],
+    ["النحل","النحل",128,"مکی"],
+    ["الإسراء","الإسراء",111,"مکی"],
+    ["الكهف","الكهف",110,"مکی"],
+    ["مريم","مريم",98,"مکی"],
+    ["طه","طه",135,"مکی"],
+    ["الأنبياء","الأنبياء",112,"مکی"],
+    ["الحج","الحج",78,"مدنی"],
+    ["المؤمنون","المؤمنون",118,"مکی"],
+    ["النور","النور",64,"مدنی"],
+    ["الفرقان","الفرقان",77,"مکی"],
+    ["الشعراء","الشعراء",227,"مکی"],
+    ["النمل","النمل",93,"مکی"],
+    ["القصص","القصص",88,"مکی"],
+    ["العنكبوت","العنكبوت",69,"مکی"],
+    ["الروم","الروم",60,"مکی"],
+    ["لقمان","لقمان",34,"مکی"],
+    ["السجدة","السجدة",30,"مکی"],
+    ["الأحزاب","الأحزاب",73,"مدنی"],
+    ["سبأ","سبأ",54,"مکی"],
+    ["فاطر","فاطر",45,"مکی"],
+    ["يس","يس",83,"مکی"],
+    ["الصافات","الصافات",182,"مکی"],
+    ["ص","ص",88,"مکی"],
+    ["الزمر","الزمر",75,"مکی"],
+    ["غافر","غافر",85,"مکی"],
+    ["فصلت","فصلت",54,"مکی"],
+    ["الشورى","الشورى",53,"مکی"],
+    ["الزخرف","الزخرف",89,"مکی"],
+    ["الدخان","الدخان",59,"مکی"],
+    ["الجاثية","الجاثية",37,"مکی"],
+    ["الأحقاف","الأحقاف",35,"مکی"],
+    ["محمد","محمد",38,"مدنی"],
+    ["الفتح","الفتح",29,"مدنی"],
+    ["الحجرات","الحجرات",18,"مدنی"],
+    ["ق","ق",45,"مکی"],
+    ["الذاريات","الذاريات",60,"مکی"],
+    ["الطور","الطور",49,"مکی"],
+    ["النجم","النجم",62,"مکی"],
+    ["القمر","القمر",55,"مکی"],
+    ["الرحمن","الرحمن",78,"مدنی"],
+    ["الواقعة","الواقعة",96,"مکی"],
+    ["الحديد","الحديد",29,"مدنی"],
+    ["المجادلة","المجادلة",22,"مدنی"],
+    ["الحشر","الحشر",24,"مدنی"],
+    ["الممتحنة","الممتحنة",13,"مدنی"],
+    ["الصف","الصف",14,"مدنی"],
+    ["الجمعة","الجمعة",11,"مدنی"],
+    ["المنافقون","المنافقون",11,"مدنی"],
+    ["التغابن","التغابن",18,"مدنی"],
+    ["الطلاق","الطلاق",12,"مدنی"],
+    ["التحريم","التحريم",12,"مدنی"],
+    ["الملك","الملك",30,"مکی"],
+    ["القلم","القلم",52,"مکی"],
+    ["الحاقة","الحاقة",52,"مکی"],
+    ["المعارج","المعارج",44,"مکی"],
+    ["نوح","نوح",28,"مکی"],
+    ["الجن","الجن",28,"مکی"],
+    ["المزمل","المزمل",20,"مکی"],
+    ["المدثر","المدثر",56,"مکی"],
+    ["القيامة","القيامة",40,"مکی"],
+    ["الإنسان","الإنسان",31,"مدنی"],
+    ["المرسلات","المرسلات",50,"مکی"],
+    ["النبأ","النبأ",40,"مکی"],
+    ["النازعات","النازعات",46,"مکی"],
+    ["عبس","عبس",42,"مکی"],
+    ["التكوير","التكوير",29,"مکی"],
+    ["الانفطار","الانفطار",19,"مکی"],
+    ["المطففين","المطففين",36,"مکی"],
+    ["الانشقاق","الانشقاق",25,"مکی"],
+    ["البروج","البروج",22,"مکی"],
+    ["الطارق","الطارق",17,"مکی"],
+    ["الأعلى","الأعلى",19,"مکی"],
+    ["الغاشية","الغاشية",26,"مکی"],
+    ["الفجر","الفجر",30,"مکی"],
+    ["البلد","البلد",20,"مکی"],
+    ["الشمس","الشمس",15,"مکی"],
+    ["الليل","الليل",21,"مکی"],
+    ["الضحى","الضحى",11,"مکی"],
+    ["الشرح","الشرح",8,"مکی"],
+    ["التين","التين",8,"مکی"],
+    ["العلق","العلق",19,"مکی"],
+    ["القدر","القدر",5,"مکی"],
+    ["البينة","البينة",8,"مدنی"],
+    ["الزلزلة","الزلزلة",8,"مدنی"],
+    ["العاديات","العاديات",11,"مکی"],
+    ["القارعة","القارعة",11,"مکی"],
+    ["التكاثر","التكاثر",8,"مکی"],
+    ["العصر","العصر",3,"مکی"],
+    ["الهمزة","الهمزة",9,"مکی"],
+    ["الفيل","الفيل",5,"مکی"],
+    ["قريش","قريش",4,"مکی"],
+    ["الماعون","الماعون",7,"مکی"],
+    ["الكوثر","الكوثر",3,"مکی"],
+    ["الكافرون","الكافرون",6,"مکی"],
+    ["النصر","النصر",3,"مدنی"],
+    ["المسد","المسد",5,"مکی"],
+    ["الإخلاص","الإخلاص",4,"مکی"],
+    ["الفلق","الفلق",5,"مکی"],
+    ["الناس","الناس",6,"مکی"]
+];
+
+
+/* =========================
+   عناصر صفحه
+========================= */
+
 const surahGrid =
     document.getElementById("surahGrid");
 
-const surahSearch =
-    document.getElementById("surahSearch");
+const searchInput =
+    document.getElementById("searchInput");
 
-const noSurahResult =
-    document.getElementById("noSurahResult");
+const noResults =
+    document.getElementById("noResults");
 
-const surahSelect =
-    document.getElementById("surahSelect");
+const surahCount =
+    document.getElementById("surahCount");
 
-const translatorSelect =
-    document.getElementById("translatorSelect");
+const surahModal =
+    document.getElementById("surahModal");
 
-const showSurahButton =
-    document.getElementById("showSurahButton");
+const closeSurah =
+    document.getElementById("closeSurah");
 
-const ayahList =
-    document.getElementById("ayahList");
+const modalSurahName =
+    document.getElementById("modalSurahName");
 
-const readerSurahNumber =
-    document.getElementById("readerSurahNumber");
+const modalSurahNumber =
+    document.getElementById("modalSurahNumber");
 
-const readerSurahName =
-    document.getElementById("readerSurahName");
+const modalSurahInfo =
+    document.getElementById("modalSurahInfo");
 
-const readerSurahInfo =
-    document.getElementById("readerSurahInfo");
+const ayahContainer =
+    document.getElementById("ayahContainer");
 
-const quranTools =
-    document.getElementById("quranTools");
+const surahLoading =
+    document.getElementById("surahLoading");
 
-const showTranslation =
-    document.getElementById("showTranslation");
+const translationSelect =
+    document.getElementById("translationSelect");
 
-const showWordMeaning =
-    document.getElementById("showWordMeaning");
+const surahAudioButton =
+    document.getElementById("surahAudioButton");
 
-const darkModeButton =
-    document.getElementById("darkModeButton");
+const themeButton =
+    document.getElementById("themeButton");
 
 const menuButton =
     document.getElementById("menuButton");
 
-const navMenu =
-    document.getElementById("navMenu");
+const nav =
+    document.querySelector(".nav");
+
+const randomButton =
+    document.getElementById("randomButton");
 
 const continueButton =
     document.getElementById("continueButton");
 
-const verseSearch =
-    document.getElementById("verseSearch");
+const continueModal =
+    document.getElementById("continueModal");
 
-const verseSearchButton =
-    document.getElementById("verseSearchButton");
+const closeContinue =
+    document.getElementById("closeContinue");
 
-const verseResults =
-    document.getElementById("verseResults");
+const continueText =
+    document.getElementById("continueText");
+
+const openContinue =
+    document.getElementById("openContinue");
 
 const bookmarkList =
     document.getElementById("bookmarkList");
 
-const bookmarkSurahButton =
-    document.getElementById(
-        "bookmarkSurahButton"
-    );
-
-const playAudioButton =
-    document.getElementById(
-        "playAudioButton"
-    );
-
-const reciterSelect =
-    document.getElementById(
-        "reciterSelect"
-    );
-
-const quranAudio =
-    document.getElementById(
-        "quranAudio"
-    );
-
-const audioPlayer =
-    document.getElementById(
-        "audioPlayer"
-    );
-
-const audioSurahName =
-    document.getElementById(
-        "audioSurahName"
-    );
-
-const audioReciterName =
-    document.getElementById(
-        "audioReciterName"
-    );
-
-const closeAudioButton =
-    document.getElementById(
-        "closeAudioButton"
-    );
-
 const toast =
     document.getElementById("toast");
 
+const searchModal =
+    document.getElementById("searchModal");
 
-let allSurahs = [];
+const closeSearch =
+    document.getElementById("closeSearch");
+
+const ayahSearchInput =
+    document.getElementById("ayahSearchInput");
+
+const ayahSearchButton =
+    document.getElementById("ayahSearchButton");
+
+const searchResults =
+    document.getElementById("searchResults");
+
+
+/* =========================
+   متغیرهای برنامه
+========================= */
 
 let currentSurah = null;
 
 let currentAyahs = [];
 
+let currentAudio = null;
 
 let bookmarks =
     JSON.parse(
-        localStorage.getItem(
-            "quranBookmarks"
-        )
+        localStorage.getItem("quranBookmarks")
     ) || [];
 
-
-/* ==================================
-   نام مترجم‌ها
-================================== */
-
-const translators = {
-
-    ansarian:
-        "حسین انصاریان",
-
-    makarem:
-        "آیت‌الله مکارم شیرازی",
-
-    fooladvand:
-        "محمدمهدی فولادوند",
-
-    elahi:
-        "الهی قمشه‌ای"
-
-};
+let lastRead =
+    JSON.parse(
+        localStorage.getItem("lastRead")
+    ) || null;
 
 
-/* ==================================
-   قاری‌ها
-================================== */
+/* =========================
+   اعداد فارسی
+========================= */
 
-const reciters = {
+function persianNumber(number) {
 
-    abdulbasit:
-        "عبدالباسط عبدالصمد",
-
-    minshawi:
-        "محمد صدیق منشاوی",
-
-    husary:
-        "محمود خلیل الحصری",
-
-    sudais:
-        "عبدالرحمن السدیس"
-
-};
-
-
-/* ==================================
-   نام سوره‌ها
-================================== */
-
-const persianSurahNames = [
-
-    "فاتحه",
-    "بقره",
-    "آل عمران",
-    "نساء",
-    "مائده",
-    "انعام",
-    "اعراف",
-    "انفال",
-    "توبه",
-    "یونس",
-    "هود",
-    "یوسف",
-    "رعد",
-    "ابراهیم",
-    "حجر",
-    "نحل",
-    "اسراء",
-    "کهف",
-    "مریم",
-    "طه",
-    "انبیاء",
-    "حج",
-    "مؤمنون",
-    "نور",
-    "فرقان",
-    "شعراء",
-    "نمل",
-    "قصص",
-    "عنکبوت",
-    "روم",
-    "لقمان",
-    "سجده",
-    "احزاب",
-    "سبأ",
-    "فاطر",
-    "یس",
-    "صافات",
-    "ص",
-    "زمر",
-    "غافر",
-    "فصلت",
-    "شوری",
-    "زخرف",
-    "دخان",
-    "جاثیه",
-    "احقاف",
-    "محمد",
-    "فتح",
-    "حجرات",
-    "ق",
-    "ذاریات",
-    "طور",
-    "نجم",
-    "قمر",
-    "رحمن",
-    "واقعه",
-    "حدید",
-    "مجادله",
-    "حشر",
-    "ممتحنه",
-    "صف",
-    "جمعه",
-    "منافقون",
-    "تغابن",
-    "طلاق",
-    "تحریم",
-    "ملک",
-    "قلم",
-    "حاقه",
-    "معارج",
-    "نوح",
-    "جن",
-    "مزمل",
-    "مدثر",
-    "قیامت",
-    "انسان",
-    "مرسلات",
-    "نبأ",
-    "نازعات",
-    "عبس",
-    "تکویر",
-    "انفطار",
-    "مطففین",
-    "انشقاق",
-    "بروج",
-    "طارق",
-    "اعلی",
-    "غاشیه",
-    "فجر",
-    "بلد",
-    "شمس",
-    "لیل",
-    "ضحی",
-    "شرح",
-    "تین",
-    "علق",
-    "قدر",
-    "بینه",
-    "زلزال",
-    "عادیات",
-    "قارعه",
-    "تکاثر",
-    "عصر",
-    "همزه",
-    "فیل",
-    "قریش",
-    "ماعون",
-    "کوثر",
-    "کافرون",
-    "نصر",
-    "مسد",
-    "اخلاص",
-    "فلق",
-    "ناس"
-
-];
-
-
-/* ==================================
-   شماره فارسی
-================================== */
-
-function faNumber(number) {
-
-    return new Intl.NumberFormat(
-        "fa-IR"
-    ).format(number);
-
-}
-
-
-/* ==================================
-   پیام
-================================== */
-
-function showToast(message) {
-
-    toast.textContent = message;
-
-    toast.classList.add("show");
-
-    setTimeout(
-        function () {
-
-            toast.classList.remove(
-                "show"
-            );
-
-        },
-        3000
+    return String(number).replace(
+        /\d/g,
+        digit =>
+            "۰۱۲۳۴۵۶۷۸۹"[digit]
     );
 
 }
 
 
-/* ==================================
-   دریافت لیست ۱۱۴ سوره
-================================== */
-
-async function loadSurahs() {
-
-    try {
-
-        const response =
-            await fetch(
-                "https://api.alquran.cloud/v1/surah"
-            );
-
-
-        const data =
-            await response.json();
-
-
-        allSurahs = data.data;
-
-
-        renderSurahs(
-            allSurahs
-        );
-
-
-        fillSurahSelect();
-
-    } catch (error) {
-
-        console.error(error);
-
-
-        surahGrid.innerHTML = `
-
-            <div class="reader-empty">
-
-                <h3>
-                    خطا در دریافت سوره‌ها
-                </h3>
-
-                <p>
-                    اتصال اینترنت را بررسی کنید.
-                </p>
-
-            </div>
-
-        `;
-
-    }
-
-}
-
-
-/* ==================================
+/* =========================
    نمایش سوره‌ها
-================================== */
+========================= */
 
-function renderSurahs(list) {
+function renderSurahs(list = surahs) {
 
     surahGrid.innerHTML = "";
 
+    surahCount.textContent =
+        `${persianNumber(list.length)} سوره`;
+
+    if (!list.length) {
+
+        noResults.classList.remove("hidden");
+
+        return;
+
+    }
+
+    noResults.classList.add("hidden");
+
 
     list.forEach(
-        function (surah) {
-
-            const persianName =
-                persianSurahNames[
-                    surah.number - 1
-                ];
-
+        (surah, index) => {
 
             const card =
-                document.createElement(
-                    "button"
-                );
-
-
-            card.type = "button";
-
+                document.createElement("article");
 
             card.className =
                 "surah-card";
 
-
             card.innerHTML = `
 
-                <span
-                    class="surah-number">
+                <span class="surah-number">
 
-                    ${faNumber(
-                        surah.number
-                    )}
+                    ${persianNumber(index + 1)}
 
                 </span>
 
+                <div>
 
-                <span
-                    class="surah-name">
+                    <h3>
+                        ${surah[0]}
+                    </h3>
 
-                    <strong>
-                        ${persianName}
-                    </strong>
+                    <p>
+                        ${surah[2]} آیه • ${surah[3]}
+                    </p>
 
-                    <span>
-                        ${surah.name}
-                    </span>
-
-                </span>
-
-
-                <span>
-
-                    ${faNumber(
-                        surah.numberOfAyahs
-                    )}
-
-                    آیه
-
-                </span>
+                </div>
 
             `;
 
 
             card.addEventListener(
                 "click",
-                function () {
-
-                    surahSelect.value =
-                        surah.number;
-
-
-                    document
-                        .getElementById(
-                            "reader"
-                        )
-                        .scrollIntoView({
-
-                            behavior:
-                                "smooth"
-
-                        });
-
-
-                    showToast(
-                        "حالا مترجم را انتخاب کنید."
-                    );
-
-                }
+                () => openSurah(index + 1)
             );
 
 
-            surahGrid.appendChild(
-                card
-            );
-
-        }
-    );
-
-
-    noSurahResult.style.display =
-
-        list.length === 0
-            ? "block"
-            : "none";
-
-}
-
-
-/* ==================================
-   پر کردن لیست انتخاب سوره
-================================== */
-
-function fillSurahSelect() {
-
-    allSurahs.forEach(
-        function (surah) {
-
-            const option =
-                document.createElement(
-                    "option"
-                );
-
-
-            option.value =
-                surah.number;
-
-
-            option.textContent =
-
-                faNumber(
-                    surah.number
-                )
-
-                +
-
-                " - "
-
-                +
-
-                persianSurahNames[
-                    surah.number - 1
-                ];
-
-
-            surahSelect.appendChild(
-                option
-            );
+            surahGrid.appendChild(card);
 
         }
     );
@@ -538,590 +329,43 @@ function fillSurahSelect() {
 }
 
 
-/* ==================================
+/* =========================
    جستجوی سوره
-================================== */
+========================= */
 
-surahSearch.addEventListener(
+searchInput.addEventListener(
     "input",
-    function () {
+    () => {
 
         const value =
-
-            surahSearch.value
+            searchInput.value
                 .trim()
                 .toLowerCase();
 
 
-        const filtered =
+        if (!value) {
 
-            allSurahs.filter(
-                function (surah) {
-
-                    const persianName =
-
-                        persianSurahNames[
-                            surah.number - 1
-                        ];
-
-
-                    return (
-
-                        persianName
-                            .toLowerCase()
-                            .includes(value)
-
-                        ||
-
-                        surah.number
-                            .toString()
-                            .includes(value)
-
-                        ||
-
-                        surah.name
-                            .includes(value)
-
-                    );
-
-                }
-            );
-
-
-        renderSurahs(
-            filtered
-        );
-
-    }
-);
-
-
-/* ==================================
-   دریافت سوره و ترجمه
-================================== */
-
-async function loadSurah() {
-
-    const surahNumber =
-        Number(
-            surahSelect.value
-        );
-
-
-    const translator =
-        translatorSelect.value;
-
-
-    if (!surahNumber) {
-
-        showToast(
-            "ابتدا سوره را انتخاب کنید."
-        );
-
-        return;
-
-    }
-
-
-    if (!translator) {
-
-        showToast(
-            "ابتدا مترجم را انتخاب کنید."
-        );
-
-        return;
-
-    }
-
-
-    showSurahButton.textContent =
-        "در حال دریافت...";
-
-
-    showSurahButton.disabled =
-        true;
-
-
-    try {
-
-        /*
-            متن عربی
-        */
-
-        const arabicResponse =
-            await fetch(
-
-                "https://api.alquran.cloud/v1/surah/"
-
-                +
-
-                surahNumber
-
-            );
-
-
-        const arabicData =
-            await arabicResponse.json();
-
-
-        currentSurah =
-            arabicData.data;
-
-
-        /*
-            ترجمه
-        */
-
-        const translationResponse =
-            await fetch(
-
-                "https://api.alquran.cloud/v1/surah/"
-
-                +
-
-                surahNumber
-
-                +
-
-                "/"
-
-                +
-
-                getTranslationEdition(
-                    translator
-                )
-
-            );
-
-
-        const translationData =
-            await translationResponse.json();
-
-
-        const translationAyahs =
-            translationData.data.ayahs;
-
-
-        currentAyahs =
-
-            currentSurah.ayahs.map(
-                function (
-                    ayah,
-                    index
-                ) {
-
-                    return {
-
-                        number:
-                            ayah.numberInSurah,
-
-                        arabic:
-                            ayah.text,
-
-                        translation:
-                            translationAyahs[
-                                index
-                            ].text
-
-                    };
-
-                }
-            );
-
-
-        renderReader();
-
-
-        quranTools.classList.add(
-            "active"
-        );
-
-
-        document
-            .getElementById(
-                "reader"
-            )
-            .scrollIntoView({
-
-                behavior:
-                    "smooth"
-
-            });
-
-
-        localStorage.setItem(
-
-            "lastQuranSurah",
-
-            JSON.stringify({
-
-                number:
-                    surahNumber,
-
-                translator:
-                    translator
-
-            })
-
-        );
-
-
-        showToast(
-            "سوره با موفقیت نمایش داده شد."
-        );
-
-    } catch (error) {
-
-        console.error(error);
-
-
-        ayahList.innerHTML = `
-
-            <div class="reader-empty">
-
-                <h3>
-                    دریافت سوره ناموفق بود
-                </h3>
-
-                <p>
-                    اینترنت خود را بررسی کنید.
-                </p>
-
-            </div>
-
-        `;
-
-
-        showToast(
-            "خطا در دریافت اطلاعات."
-        );
-
-    } finally {
-
-        showSurahButton.textContent =
-            "نمایش سوره";
-
-
-        showSurahButton.disabled =
-            false;
-
-    }
-
-}
-
-
-/* ==================================
-   انتخاب ترجمه
-================================== */
-
-function getTranslationEdition(
-    translator
-) {
-
-    const editions = {
-
-        ansarian:
-            "fa.ansarian",
-
-        makarem:
-            "fa.makarem",
-
-        fooladvand:
-            "fa.fooladvand",
-
-        elahi:
-            "fa.elahi"
-
-    };
-
-
-    return editions[
-        translator
-    ];
-
-}
-
-
-/* ==================================
-   نمایش سوره
-================================== */
-
-function renderReader() {
-
-    if (!currentSurah) {
-
-        return;
-
-    }
-
-
-    readerSurahNumber.textContent =
-
-        "سوره "
-
-        +
-
-        faNumber(
-            currentSurah.number
-        );
-
-
-    readerSurahName.textContent =
-
-        persianSurahNames[
-            currentSurah.number - 1
-        ]
-
-        +
-
-        " | "
-
-        +
-
-        currentSurah.name;
-
-
-    readerSurahInfo.textContent =
-
-        currentSurah.numberOfAyahs
-
-        +
-
-        " آیه | "
-
-        +
-
-        translators[
-            translatorSelect.value
-        ];
-
-
-    ayahList.innerHTML = "";
-
-
-    currentAyahs.forEach(
-        function (ayah) {
-
-            const isSaved =
-
-                bookmarks.some(
-                    function (item) {
-
-                        return (
-
-                            item.surah ===
-                                currentSurah.number
-
-                            &&
-
-                            item.ayah ===
-                                ayah.number
-
-                        );
-
-                    }
-                );
-
-
-            const card =
-                document.createElement(
-                    "article"
-                );
-
-
-            card.className =
-                "ayah-card";
-
-
-            card.dataset.ayah =
-                ayah.number;
-
-
-            card.innerHTML = `
-
-                <div class="ayah-top">
-
-                    <span
-                        class="ayah-number">
-
-                        ${faNumber(
-                            ayah.number
-                        )}
-
-                    </span>
-
-
-                    <button
-                        class="bookmark-button
-                        ${
-
-                            isSaved
-
-                                ? "saved"
-
-                                : ""
-
-                        }"
-
-                        data-ayah="${ayah.number}"
-
-                        type="button">
-
-                        🔖
-
-                    </button>
-
-                </div>
-
-
-                <p
-                    class="ayah-text">
-
-                    ${ayah.arabic}
-
-                </p>
-
-
-                <p
-                    class="translation
-                    ${
-
-                        showTranslation.checked
-
-                            ? ""
-
-                            : "hidden"
-
-                    }">
-
-                    ${ayah.translation}
-
-                </p>
-
-
-                <div
-                    class="word-meaning">
-
-                    لغت‌نامه:
-                    توضیح واژه‌های مهم این آیه
-                    در نسخه بعدی اضافه می‌شود.
-
-                </div>
-
-            `;
-
-
-            ayahList.appendChild(
-                card
-            );
-
-        }
-    );
-
-
-    updateTranslationVisibility();
-
-}
-
-
-/* ==================================
-   نمایش ترجمه
-================================== */
-
-function updateTranslationVisibility() {
-
-    document
-        .querySelectorAll(
-            ".translation"
-        )
-        .forEach(
-            function (element) {
-
-                element.style.display =
-
-                    showTranslation.checked
-
-                        ? "block"
-
-                        : "none";
-
-            }
-        );
-
-
-    document
-        .querySelectorAll(
-            ".word-meaning"
-        )
-        .forEach(
-            function (element) {
-
-                element.style.display =
-
-                    showWordMeaning.checked
-
-                        ? "block"
-
-                        : "none";
-
-            }
-        );
-
-}
-
-
-showTranslation.addEventListener(
-    "change",
-    updateTranslationVisibility
-);
-
-
-showWordMeaning.addEventListener(
-    "change",
-    updateTranslationVisibility
-);
-
-
-/* ==================================
-   ذخیره آیه
-================================== */
-
-ayahList.addEventListener(
-    "click",
-    function (event) {
-
-        const button =
-            event.target.closest(
-                ".bookmark-button"
-            );
-
-
-        if (!button) {
+            renderSurahs();
 
             return;
 
         }
 
 
-        const ayahNumber =
-            Number(
-                button.dataset.ayah
-            );
-
-
-        const index =
-            bookmarks.findIndex(
-                function (item) {
+        const filtered =
+            surahs.filter(
+                (surah, index) => {
 
                     return (
 
-                        item.surah ===
-                            currentSurah.number
+                        surah[0]
+                            .toLowerCase()
+                            .includes(value)
 
-                        &&
+                        ||
 
-                        item.ayah ===
-                            ayahNumber
+                        String(index + 1)
+                            .includes(value)
 
                     );
 
@@ -1129,105 +373,605 @@ ayahList.addEventListener(
             );
 
 
-        if (index >= 0) {
-
-            bookmarks.splice(
-                index,
-                1
-            );
-
-
-            showToast(
-                "نشان‌گذاری حذف شد."
-            );
-
-        } else {
-
-            const ayah =
-
-                currentAyahs.find(
-                    function (item) {
-
-                        return (
-
-                            item.number ===
-                                ayahNumber
-
-                        );
-
-                    }
-                );
-
-
-            bookmarks.push({
-
-                surah:
-                    currentSurah.number,
-
-                surahName:
-                    persianSurahNames[
-                        currentSurah.number - 1
-                    ],
-
-                ayah:
-                    ayahNumber,
-
-                text:
-                    ayah.arabic
-
-            });
-
-
-            showToast(
-                "آیه نشان‌گذاری شد."
-            );
-
-        }
-
-
-        localStorage.setItem(
-
-            "quranBookmarks",
-
-            JSON.stringify(
-                bookmarks
-            )
-
-        );
-
-
-        renderBookmarks();
-
-
-        renderReader();
+        renderSurahs(filtered);
 
     }
 );
 
 
-/* ==================================
+/* =========================
+   باز کردن سوره
+========================= */
+
+async function openSurah(number, ayahToOpen = null) {
+
+    currentSurah = number;
+
+    surahModal.classList.add("active");
+
+    document.body.style.overflow = "hidden";
+
+    const info = surahs[number - 1];
+
+    modalSurahName.textContent =
+        info[0];
+
+    modalSurahNumber.textContent =
+        persianNumber(number);
+
+    modalSurahInfo.textContent =
+        `${info[2]} آیه • ${info[3]}`;
+
+
+    ayahContainer.innerHTML = "";
+
+    surahLoading.style.display = "block";
+
+
+    try {
+
+        const response =
+            await fetch(
+                `${API}/surah/${number}`
+            );
+
+
+        if (!response.ok) {
+            throw new Error();
+        }
+
+
+        const result =
+            await response.json();
+
+
+        currentAyahs =
+            result.data.ayahs;
+
+
+        renderAyahs();
+
+
+        if (ayahToOpen) {
+
+            setTimeout(
+                () => {
+
+                    const target =
+                        document.getElementById(
+                            `ayah-${ayahToOpen}`
+                        );
+
+                    if (target) {
+
+                        target.scrollIntoView({
+                            behavior: "smooth",
+                            block: "center"
+                        });
+
+                    }
+
+                },
+                400
+            );
+
+        }
+
+    } catch (error) {
+
+        ayahContainer.innerHTML = `
+
+            <div class="no-results">
+
+                <div>⚠️</div>
+
+                <h3>
+                    دریافت قرآن ناموفق بود
+                </h3>
+
+                <p>
+                    اتصال اینترنت را بررسی کنید و دوباره تلاش کنید.
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    surahLoading.style.display = "none";
+
+}
+
+
+/* =========================
+   نمایش آیات
+========================= */
+
+function renderAyahs() {
+
+    ayahContainer.innerHTML = "";
+
+
+    currentAyahs.forEach(
+        ayah => {
+
+            const element =
+                document.createElement("article");
+
+            element.className = "ayah";
+
+            element.id =
+                `ayah-${ayah.numberInSurah}`;
+
+
+            const saved =
+                isBookmarked(
+                    currentSurah,
+                    ayah.numberInSurah
+                );
+
+
+            element.innerHTML = `
+
+                <div class="ayah-top">
+
+                    <span class="ayah-number">
+
+                        ${persianNumber(
+                            ayah.numberInSurah
+                        )}
+
+                    </span>
+
+
+                    <div class="ayah-actions">
+
+                        <button
+                            class="ayah-action bookmark-btn
+                            ${saved ? "active" : ""}"
+                            data-ayah="${ayah.numberInSurah}"
+                            title="نشانه‌گذاری">
+
+                            ${saved ? "★" : "☆"}
+
+                        </button>
+
+
+                        <button
+                            class="ayah-action play-btn"
+                            data-ayah="${ayah.numberInSurah}"
+                            title="پخش آیه">
+
+                            ▶
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="ayah-text">
+
+                    ${ayah.text}
+
+                </div>
+
+
+                <div
+                    class="translation"
+                    id="translation-${ayah.numberInSurah}">
+
+                </div>
+
+            `;
+
+
+            ayahContainer.appendChild(element);
+
+        }
+    );
+
+
+    attachAyahEvents();
+
+}
+
+
+/* =========================
+   انتخاب مترجم
+========================= */
+
+translationSelect.addEventListener(
+    "change",
+    async () => {
+
+        const edition =
+            translationSelect.value;
+
+
+        document
+            .querySelectorAll(".translation")
+            .forEach(
+                element => {
+
+                    element.innerHTML = "";
+
+                }
+            );
+
+
+        if (!edition) {
+
+            return;
+
+        }
+
+
+        showToast(
+            "در حال دریافت ترجمه..."
+        );
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API}/surah/${currentSurah}/${edition}`
+                );
+
+
+            if (!response.ok) {
+                throw new Error();
+            }
+
+
+            const result =
+                await response.json();
+
+
+            result.data.ayahs.forEach(
+                translation => {
+
+                    const box =
+                        document.getElementById(
+                            `translation-${translation.numberInSurah}`
+                        );
+
+
+                    if (box) {
+
+                        box.textContent =
+                            translation.text;
+
+                    }
+
+                }
+            );
+
+
+            showToast(
+                "ترجمه نمایش داده شد ✓"
+            );
+
+        } catch {
+
+            showToast(
+                "ترجمه دریافت نشد."
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================
+   رویدادهای آیه
+========================= */
+
+function attachAyahEvents() {
+
+    document
+        .querySelectorAll(".bookmark-btn")
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        const ayah =
+                            Number(
+                                button.dataset.ayah
+                            );
+
+                        toggleBookmark(
+                            currentSurah,
+                            ayah
+                        );
+
+                        renderAyahs();
+
+                        renderBookmarks();
+
+                    }
+                );
+
+            }
+        );
+
+
+    document
+        .querySelectorAll(".play-btn")
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    () => {
+
+                        const ayah =
+                            currentAyahs.find(
+                                item =>
+                                    item.numberInSurah ===
+                                    Number(
+                                        button.dataset.ayah
+                                    )
+                            );
+
+
+                        if (ayah) {
+
+                            playAyah(ayah);
+
+                            saveLastRead(
+                                currentSurah,
+                                ayah.numberInSurah
+                            );
+
+                        }
+
+                    }
+                );
+
+            }
+        );
+
+
+    document
+        .querySelectorAll(".ayah")
+        .forEach(
+            element => {
+
+                element.addEventListener(
+                    "click",
+                    event => {
+
+                        if (
+                            event.target.closest(
+                                "button"
+                            )
+                        ) {
+                            return;
+                        }
+
+
+                        const number =
+                            Number(
+                                element.id
+                                    .replace(
+                                        "ayah-",
+                                        ""
+                                    )
+                            );
+
+
+                        saveLastRead(
+                            currentSurah,
+                            number
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+}
+
+
+/* =========================
+   پخش آیه
+========================= */
+
+function playAyah(ayah) {
+
+    stopAudio();
+
+
+    const url =
+        `${AUDIO}/${ayah.number}.mp3`;
+
+
+    currentAudio =
+        new Audio(url);
+
+
+    currentAudio.play()
+        .catch(
+            () => {
+
+                showToast(
+                    "برای پخش صوت روی صفحه تعامل کنید."
+                );
+
+            }
+        );
+
+
+    showToast(
+        `پخش آیه ${persianNumber(
+            ayah.numberInSurah
+        )}`
+    );
+
+}
+
+
+/* =========================
+   پخش کل سوره
+========================= */
+
+surahAudioButton.addEventListener(
+    "click",
+    () => {
+
+        if (!currentSurah) {
+            return;
+        }
+
+
+        stopAudio();
+
+
+        const url =
+            `https://cdn.islamic.network/quran/audio-surah/64/ar.alafasy/${currentSurah}.mp3`;
+
+
+        currentAudio =
+            new Audio(url);
+
+
+        currentAudio.play()
+            .catch(
+                () => {}
+            );
+
+
+        showToast(
+            "پخش سوره شروع شد 🎧"
+        );
+
+    }
+);
+
+
+/* =========================
+   توقف صوت
+========================= */
+
+function stopAudio() {
+
+    if (currentAudio) {
+
+        currentAudio.pause();
+
+        currentAudio.currentTime = 0;
+
+        currentAudio = null;
+
+    }
+
+}
+
+
+/* =========================
+   نشانه‌گذاری
+========================= */
+
+function isBookmarked(surah, ayah) {
+
+    return bookmarks.some(
+        item =>
+            item.surah === surah &&
+            item.ayah === ayah
+    );
+
+}
+
+
+function toggleBookmark(surah, ayah) {
+
+    const index =
+        bookmarks.findIndex(
+            item =>
+                item.surah === surah &&
+                item.ayah === ayah
+        );
+
+
+    if (index >= 0) {
+
+        bookmarks.splice(index, 1);
+
+        showToast(
+            "از نشان‌شده‌ها حذف شد"
+        );
+
+    } else {
+
+        const verse =
+            currentAyahs.find(
+                item =>
+                    item.numberInSurah === ayah
+            );
+
+
+        bookmarks.push({
+
+            surah,
+            ayah,
+
+            text:
+                verse
+                    ? verse.text
+                    : ""
+
+        });
+
+
+        showToast(
+            "آیه ذخیره شد ★"
+        );
+
+    }
+
+
+    localStorage.setItem(
+        "quranBookmarks",
+        JSON.stringify(bookmarks)
+    );
+
+}
+
+
+/* =========================
    نمایش نشان‌شده‌ها
-================================== */
+========================= */
 
 function renderBookmarks() {
 
     bookmarkList.innerHTML = "";
 
 
-    if (bookmarks.length === 0) {
+    if (!bookmarks.length) {
 
         bookmarkList.innerHTML = `
 
-            <div
-                class="empty-bookmark">
+            <div class="empty-bookmarks">
 
-                هنوز آیه‌ای
-                نشان‌گذاری نشده است.
+                🔖
+
+                <br><br>
+
+                هنوز آیه‌ای ذخیره نکرده‌اید.
 
             </div>
 
         `;
-
 
         return;
 
@@ -1235,62 +979,49 @@ function renderBookmarks() {
 
 
     bookmarks.forEach(
-        function (
-            bookmark,
-            index
-        ) {
+        item => {
 
-            const item =
-                document.createElement(
-                    "div"
-                );
+            const surah =
+                surahs[item.surah - 1];
 
 
-            item.className =
-                "bookmark-item";
+            const card =
+                document.createElement("article");
+
+            card.className =
+                "bookmark-card";
 
 
-            item.innerHTML = `
+            card.innerHTML = `
 
-                <div>
+                <strong>
 
-                    <strong>
+                    سوره ${surah[0]}
+                    • آیه ${persianNumber(item.ayah)}
 
-                        ${bookmark.surahName}
+                </strong>
 
-                        -
-
-                        آیه
-
-                        ${faNumber(
-                            bookmark.ayah
-                        )}
-
-                    </strong>
-
-
-                    <p>
-
-                        ${bookmark.text}
-
-                    </p>
-
-                </div>
-
-
-                <button
-                    data-index="${index}">
-
-                    حذف
-
-                </button>
+                <p>
+                    ${item.text}
+                </p>
 
             `;
 
 
-            bookmarkList.appendChild(
-                item
+            card.addEventListener(
+                "click",
+                () => {
+
+                    openSurah(
+                        item.surah,
+                        item.ayah
+                    );
+
+                }
             );
+
+
+            bookmarkList.appendChild(card);
 
         }
     );
@@ -1298,152 +1029,178 @@ function renderBookmarks() {
 }
 
 
-bookmarkList.addEventListener(
-    "click",
-    function (event) {
+/* =========================
+   ذخیره آخرین آیه
+========================= */
 
-        const index =
-            event.target.dataset.index;
+function saveLastRead(surah, ayah) {
 
-
-        if (
-            index === undefined
-        ) {
-
-            return;
-
-        }
+    lastRead = {
+        surah,
+        ayah
+    };
 
 
-        bookmarks.splice(
-            index,
-            1
-        );
+    localStorage.setItem(
+        "lastRead",
+        JSON.stringify(lastRead)
+    );
+
+}
 
 
-        localStorage.setItem(
-
-            "quranBookmarks",
-
-            JSON.stringify(
-                bookmarks
-            )
-
-        );
-
-
-        renderBookmarks();
-
-
-        if (currentSurah) {
-
-            renderReader();
-
-        }
-
-    }
-);
-
-
-/* ==================================
-   نشان‌گذاری کل سوره
-================================== */
-
-bookmarkSurahButton.addEventListener(
-    "click",
-    function () {
-
-        if (!currentSurah) {
-
-            showToast(
-                "ابتدا یک سوره انتخاب کنید."
-            );
-
-            return;
-
-        }
-
-
-        document
-            .getElementById(
-                "reader"
-            )
-            .scrollIntoView({
-
-                behavior:
-                    "smooth"
-
-            });
-
-
-        showToast(
-            "برای نشان‌گذاری، روی 🔖 کنار هر آیه بزنید."
-        );
-
-    }
-);
-
-
-/* ==================================
+/* =========================
    ادامه مطالعه
-================================== */
+========================= */
+
+function openContinueModal() {
+
+    if (!lastRead) {
+
+        continueText.textContent =
+            "هنوز هیچ آیه‌ای مطالعه نشده است.";
+
+        openContinue.style.display =
+            "none";
+
+    } else {
+
+        const surah =
+            surahs[lastRead.surah - 1];
+
+
+        continueText.textContent =
+            `آخرین مطالعه شما: سوره ${surah[0]}، آیه ${persianNumber(lastRead.ayah)}`;
+
+
+        openContinue.style.display =
+            "inline-block";
+
+    }
+
+
+    continueModal.classList.add("active");
+
+}
+
 
 continueButton.addEventListener(
     "click",
-    function () {
-
-        const last =
-            JSON.parse(
-                localStorage.getItem(
-                    "lastQuranSurah"
-                )
-            );
+    openContinueModal
+);
 
 
-        if (!last) {
+openContinue.addEventListener(
+    "click",
+    () => {
 
-            showToast(
-                "هنوز سوره‌ای مطالعه نکرده‌اید."
-            );
-
+        if (!lastRead) {
             return;
-
         }
 
 
-        surahSelect.value =
-            last.number;
+        continueModal.classList.remove(
+            "active"
+        );
 
 
-        translatorSelect.value =
-            last.translator;
-
-
-        loadSurah();
+        openSurah(
+            lastRead.surah,
+            lastRead.ayah
+        );
 
     }
 );
 
 
-/* ==================================
-   جستجوی آیه
-================================== */
+/* =========================
+   آیه تصادفی
+========================= */
 
-verseSearchButton.addEventListener(
+randomButton.addEventListener(
     "click",
-    searchVerses
+    async () => {
+
+        const surah =
+            Math.floor(
+                Math.random() * 114
+            ) + 1;
+
+
+        const info =
+            surahs[surah - 1];
+
+
+        const ayah =
+            Math.floor(
+                Math.random() * info[2]
+            ) + 1;
+
+
+        openSurah(
+            surah,
+            ayah
+        );
+
+    }
 );
 
 
-verseSearch.addEventListener(
+/* =========================
+   جستجوی آیه
+========================= */
+
+searchInput.addEventListener(
     "keydown",
-    function (event) {
+    event => {
+
+        if (
+            event.key === "Enter" &&
+            searchInput.value.trim()
+        ) {
+
+            openSearchModal();
+
+        }
+
+    }
+);
+
+
+function openSearchModal() {
+
+    searchModal.classList.add(
+        "active"
+    );
+
+    document.body.style.overflow =
+        "hidden";
+
+
+    ayahSearchInput.value =
+        searchInput.value.trim();
+
+
+    searchResults.innerHTML = "";
+
+}
+
+
+ayahSearchButton.addEventListener(
+    "click",
+    searchAyahs
+);
+
+
+ayahSearchInput.addEventListener(
+    "keydown",
+    event => {
 
         if (
             event.key === "Enter"
         ) {
 
-            searchVerses();
+            searchAyahs();
 
         }
 
@@ -1451,17 +1208,16 @@ verseSearch.addEventListener(
 );
 
 
-function searchVerses() {
+async function searchAyahs() {
 
     const query =
-        verseSearch.value
-            .trim();
+        ayahSearchInput.value.trim();
 
 
     if (!query) {
 
         showToast(
-            "کلمه موردنظر را وارد کنید."
+            "عبارت جستجو را وارد کنید."
         );
 
         return;
@@ -1469,9 +1225,11 @@ function searchVerses() {
     }
 
 
-    verseResults.innerHTML = `
+    searchResults.innerHTML = `
 
-        <div class="reader-empty">
+        <div class="loading">
+
+            <div class="spinner"></div>
 
             در حال جستجو...
 
@@ -1480,193 +1238,192 @@ function searchVerses() {
     `;
 
 
-    const results = [];
+    try {
+
+        const response =
+            await fetch(
+                `${API}/search/${encodeURIComponent(query)}/all`
+            );
 
 
-    currentAyahs.forEach(
-        function (ayah) {
-
-            if (
-
-                ayah.arabic
-                    .includes(query)
-
-                ||
-
-                ayah.translation
-                    .includes(query)
-
-            ) {
-
-                results.push(
-                    ayah
-                );
-
-            }
-
+        if (!response.ok) {
+            throw new Error();
         }
-    );
 
 
-    if (results.length === 0) {
-
-        verseResults.innerHTML = `
-
-            <div class="reader-empty">
-
-                نتیجه‌ای پیدا نشد.
-
-                <br>
-
-                برای جستجوی دقیق،
-                ابتدا سوره موردنظر را
-                انتخاب و نمایش دهید.
-
-            </div>
-
-        `;
+        const result =
+            await response.json();
 
 
-        return;
-
-    }
+        searchResults.innerHTML = "";
 
 
-    verseResults.innerHTML = "";
+        if (
+            !result.data ||
+            !result.data.matches ||
+            !result.data.matches.length
+        ) {
 
+            searchResults.innerHTML = `
 
-    results.forEach(
-        function (ayah) {
+                <div class="no-results">
 
-            const item =
-                document.createElement(
-                    "article"
-                );
-
-
-            item.className =
-                "verse-result-card";
-
-
-            item.innerHTML = `
-
-                <strong>
-
-                    سوره
-
-                    ${currentSurah.name}
-
-                    -
-
-                    آیه
-
-                    ${faNumber(
-                        ayah.number
-                    )}
-
-                </strong>
-
-
-                <p>
-
-                    ${ayah.arabic}
-
-                </p>
-
-
-                <div
-                    class="translation">
-
-                    ${ayah.translation}
+                    چیزی پیدا نشد.
 
                 </div>
 
             `;
 
-
-            verseResults.appendChild(
-                item
-            );
+            return;
 
         }
-    );
+
+
+        result.data.matches
+            .slice(0, 50)
+            .forEach(
+                match => {
+
+                    const resultElement =
+                        document.createElement(
+                            "article"
+                        );
+
+
+                    resultElement.className =
+                        "search-result";
+
+
+                    resultElement.innerHTML = `
+
+                        <small>
+
+                            ${match.surah.name}
+                            • آیه
+                            ${persianNumber(
+                                match.numberInSurah
+                            )}
+
+                        </small>
+
+                        <p>
+                            ${match.text}
+                        </p>
+
+                    `;
+
+
+                    resultElement.addEventListener(
+                        "click",
+                        () => {
+
+                            searchModal.classList.remove(
+                                "active"
+                            );
+
+
+                            openSurah(
+                                match.surah.number,
+                                match.numberInSurah
+                            );
+
+                        }
+                    );
+
+
+                    searchResults.appendChild(
+                        resultElement
+                    );
+
+                }
+            );
+
+
+    } catch {
+
+        searchResults.innerHTML = `
+
+            <div class="no-results">
+
+                جستجو انجام نشد.
+                اتصال اینترنت را بررسی کنید.
+
+            </div>
+
+        `;
+
+    }
 
 }
 
 
-/* ==================================
+/* =========================
    حالت شب
-================================== */
+========================= */
 
-darkModeButton.addEventListener(
+function loadTheme() {
+
+    const theme =
+        localStorage.getItem(
+            "quranTheme"
+        );
+
+
+    if (theme === "dark") {
+
+        document.body.classList.add(
+            "dark"
+        );
+
+        themeButton.textContent =
+            "☀️";
+
+    }
+
+}
+
+
+themeButton.addEventListener(
     "click",
-    function () {
+    () => {
 
         document.body.classList.toggle(
             "dark"
         );
 
 
-        const isDark =
-
+        const dark =
             document.body.classList.contains(
                 "dark"
             );
 
 
-        darkModeButton.textContent =
-
-            isDark
-
-                ? "☀️"
-
-                : "🌙";
-
-
         localStorage.setItem(
-
-            "quranDarkMode",
-
-            isDark
-
+            "quranTheme",
+            dark
+                ? "dark"
+                : "light"
         );
+
+
+        themeButton.textContent =
+            dark
+                ? "☀️"
+                : "🌙";
 
     }
 );
 
 
-/* ==================================
-   ذخیره حالت شب
-================================== */
-
-if (
-
-    localStorage.getItem(
-        "quranDarkMode"
-    ) === "true"
-
-) {
-
-    document.body.classList.add(
-        "dark"
-    );
-
-
-    darkModeButton.textContent =
-        "☀️";
-
-}
-
-
-/* ==================================
+/* =========================
    منوی موبایل
-================================== */
+========================= */
 
 menuButton.addEventListener(
     "click",
-    function () {
+    () => {
 
-        navMenu.classList.toggle(
+        nav.classList.toggle(
             "active"
         );
 
@@ -1674,16 +1431,15 @@ menuButton.addEventListener(
 );
 
 
-navMenu
-    .querySelectorAll("a")
+nav.querySelectorAll("a")
     .forEach(
-        function (link) {
+        link => {
 
             link.addEventListener(
                 "click",
-                function () {
+                () => {
 
-                    navMenu.classList.remove(
+                    nav.classList.remove(
                         "active"
                     );
 
@@ -1694,76 +1450,47 @@ navMenu
     );
 
 
-/* ==================================
-   صوت
-================================== */
+/* =========================
+   بستن پنجره‌ها
+========================= */
 
-playAudioButton.addEventListener(
+closeSurah.addEventListener(
     "click",
-    function () {
+    () => {
 
-        if (!currentSurah) {
-
-            showToast(
-                "ابتدا یک سوره را انتخاب کنید."
-            );
-
-            return;
-
-        }
-
-
-        const reciter =
-            reciterSelect.value;
-
-
-        const reciterName =
-            reciters[
-                reciter
-            ];
-
-
-        audioSurahName.textContent =
-
-            "سوره "
-
-            +
-
-            persianSurahNames[
-                currentSurah.number - 1
-            ];
-
-
-        audioReciterName.textContent =
-            reciterName;
-
-
-        /*
-            فعلاً ساختار صوت آماده است.
-            لینک صوت باید براساس API
-            انتخابی قاری اضافه شود.
-        */
-
-        audioPlayer.classList.add(
+        surahModal.classList.remove(
             "active"
         );
 
+        document.body.style.overflow =
+            "";
 
-        showToast(
-            "پخش‌کننده صوت آماده است."
-        );
+        stopAudio();
 
     }
 );
 
 
-closeAudioButton.addEventListener(
+closeSearch.addEventListener(
     "click",
-    function () {
+    () => {
 
-        quranAudio.pause();
+        searchModal.classList.remove(
+            "active"
+        );
 
-        audioPlayer.classList.remove(
+        document.body.style.overflow =
+            "";
+
+    }
+);
+
+
+closeContinue.addEventListener(
+    "click",
+    () => {
+
+        continueModal.classList.remove(
             "active"
         );
 
@@ -1771,20 +1498,81 @@ closeAudioButton.addEventListener(
 );
 
 
-/* ==================================
-   دکمه نمایش سوره
-================================== */
+[
+    surahModal,
+    searchModal,
+    continueModal
+].forEach(
+    modal => {
 
-showSurahButton.addEventListener(
-    "click",
-    loadSurah
+        modal.addEventListener(
+            "click",
+            event => {
+
+                if (
+                    event.target === modal
+                ) {
+
+                    modal.classList.remove(
+                        "active"
+                    );
+
+                    document.body.style.overflow =
+                        "";
+
+                }
+
+            }
+        );
+
+    }
 );
 
 
-/* ==================================
-   شروع سایت
-================================== */
+/* =========================
+   پیام
+========================= */
 
-loadSurahs();
+let toastTimer;
+
+
+function showToast(message) {
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            () => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2500
+        );
+
+}
+
+
+/* =========================
+   شروع برنامه
+========================= */
+
+renderSurahs();
 
 renderBookmarks();
+
+loadTheme();
