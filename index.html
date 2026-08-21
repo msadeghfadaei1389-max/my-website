@@ -4,193 +4,643 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>قرآن کریم | تلاوت و ترجمه</title>
+    <title>قرآن کریم | محمد صادق</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="200.css">
 </head>
 
 <body>
 
-<header class="header">
-    <div>
-        <h1>📖 قرآن کریم</h1>
-        <p>تلاوت، ترجمه و جستجوی آیات</p>
+    <!-- هدر -->
+
+    <header class="header">
+
+        <a href="#" class="logo">
+            <div class="logo-icon">ق</div>
+
+            <div>
+                <strong>قرآن کریم</strong>
+                <span>تلاوت، ترجمه و تدبر</span>
+            </div>
+        </a>
+
+
+        <nav class="nav" id="navMenu">
+
+            <a href="#home">خانه</a>
+
+            <a href="#surahs">سوره‌ها</a>
+
+            <a href="#reader">مطالعه قرآن</a>
+
+            <a href="#bookmarks">نشان‌شده‌ها</a>
+
+        </nav>
+
+
+        <div class="header-actions">
+
+            <button
+                class="icon-button"
+                id="darkModeButton"
+                type="button"
+                aria-label="تغییر حالت شب">
+
+                🌙
+
+            </button>
+
+
+            <button
+                class="menu-button"
+                id="menuButton"
+                type="button"
+                aria-label="باز کردن منو">
+
+                ☰
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <!-- صفحه اصلی -->
+
+        <section
+            class="hero"
+            id="home">
+
+            <div class="hero-content">
+
+                <span class="hero-badge">
+                    بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
+                </span>
+
+
+                <h1>
+                    قرآن کریم،
+                    <span>
+                        همراه همیشگی شما
+                    </span>
+                </h1>
+
+
+                <p>
+                    متن قرآن کریم، ترجمه فارسی، جستجوی آیات،
+                    نشان‌گذاری و امکان ادامه مطالعه از آخرین آیه.
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <a
+                        href="#surahs"
+                        class="primary-button">
+
+                        شروع مطالعه
+
+                    </a>
+
+
+                    <button
+                        class="secondary-button"
+                        id="continueButton"
+                        type="button">
+
+                        ادامه از آخرین آیه
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-card">
+
+                <div class="hero-quran">
+
+                    <div class="quran-mark">
+                        ۞
+                    </div>
+
+                    <h2>
+                        وَرَتِّلِ الْقُرْآنَ تَرْتِيلًا
+                    </h2>
+
+                    <p>
+                        قرآن را با آرامش و دقت تلاوت کن.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- انتخاب سوره -->
+
+        <section
+            class="surahs-section"
+            id="surahs">
+
+            <div class="section-heading">
+
+                <span>
+                    ۱۱۴ سوره
+                </span>
+
+                <h2>
+                    سوره‌های قرآن کریم
+                </h2>
+
+                <p>
+                    نام سوره موردنظر خود را جستجو یا انتخاب کنید.
+                </p>
+
+            </div>
+
+
+            <!-- جستجوی سوره -->
+
+            <div class="search-box">
+
+                <span class="search-icon">
+                    🔍
+                </span>
+
+                <input
+                    id="surahSearch"
+                    type="search"
+                    placeholder="جستجوی نام یا شماره سوره...">
+
+            </div>
+
+
+            <!-- جدول سوره‌ها -->
+
+            <div
+                class="surah-grid"
+                id="surahGrid">
+
+            </div>
+
+
+            <p
+                class="no-result"
+                id="noSurahResult">
+
+                سوره‌ای پیدا نشد.
+
+            </p>
+
+        </section>
+
+
+        <!-- مطالعه قرآن -->
+
+        <section
+            class="reader-section"
+            id="reader">
+
+            <div class="section-heading">
+
+                <span>
+                    مطالعه
+                </span>
+
+                <h2>
+                    متن و ترجمه قرآن
+                </h2>
+
+                <p>
+                    ابتدا سوره و مترجم موردنظر خود را انتخاب کنید.
+                </p>
+
+            </div>
+
+
+            <!-- انتخاب سوره و مترجم -->
+
+            <div class="reader-controls">
+
+                <div class="control-group">
+
+                    <label for="surahSelect">
+
+                        انتخاب سوره
+
+                    </label>
+
+                    <select id="surahSelect">
+
+                        <option value="">
+
+                            انتخاب سوره
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="control-group">
+
+                    <label for="translatorSelect">
+
+                        انتخاب مترجم
+
+                    </label>
+
+                    <select id="translatorSelect">
+
+                        <option value="">
+
+                            ابتدا مترجم را انتخاب کنید
+
+                        </option>
+
+                        <option value="ansarian">
+
+                            حسین انصاریان
+
+                        </option>
+
+                        <option value="makarem">
+
+                            آیت‌الله مکارم شیرازی
+
+                        </option>
+
+                        <option value="fooladvand">
+
+                            محمدمهدی فولادوند
+
+                        </option>
+
+                        <option value="elahi">
+
+                            الهی قمشه‌ای
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    class="read-button"
+                    id="showSurahButton"
+                    type="button">
+
+                    نمایش سوره
+
+                </button>
+
+            </div>
+
+
+            <!-- ابزارهای سوره -->
+
+            <div
+                class="quran-tools"
+                id="quranTools">
+
+                <button
+                    id="playAudioButton"
+                    type="button">
+
+                    ▶ پخش تلاوت
+
+                </button>
+
+
+                <select
+                    id="reciterSelect">
+
+                    <option value="abdulbasit">
+
+                        عبدالباسط عبدالصمد
+
+                    </option>
+
+                    <option value="minshawi">
+
+                        محمد صدیق منشاوی
+
+                    </option>
+
+                    <option value="husary">
+
+                        محمود خلیل الحصری
+
+                    </option>
+
+                    <option value="sudais">
+
+                        عبدالرحمن السدیس
+
+                    </option>
+
+                </select>
+
+
+                <button
+                    id="bookmarkSurahButton"
+                    type="button">
+
+                    🔖 نشان‌گذاری
+
+                </button>
+
+            </div>
+
+
+            <!-- عنوان سوره -->
+
+            <div
+                class="surah-reader-header"
+                id="surahReaderHeader">
+
+                <div class="reader-decoration">
+                    ۞
+                </div>
+
+                <div>
+
+                    <span id="readerSurahNumber">
+
+                        —
+
+                    </span>
+
+                    <h2 id="readerSurahName">
+
+                        یک سوره را انتخاب کنید
+
+                    </h2>
+
+                    <p id="readerSurahInfo">
+
+                        متن آیات پس از انتخاب سوره نمایش داده می‌شود.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- انتخاب نمایش ترجمه -->
+
+            <div
+                class="translation-options"
+                id="translationOptions">
+
+                <label class="translation-toggle">
+
+                    <input
+                        type="checkbox"
+                        id="showTranslation"
+                        checked>
+
+                    <span>
+                        نمایش ترجمه
+                    </span>
+
+                </label>
+
+
+                <label class="translation-toggle">
+
+                    <input
+                        type="checkbox"
+                        id="showWordMeaning">
+
+                    <span>
+                        نمایش لغت‌نامه
+                    </span>
+
+                </label>
+
+            </div>
+
+
+            <!-- آیات -->
+
+            <div
+                class="ayah-list"
+                id="ayahList">
+
+                <div class="reader-empty">
+
+                    <div>
+                        📖
+                    </div>
+
+                    <h3>
+                        آماده مطالعه هستید؟
+                    </h3>
+
+                    <p>
+                        ابتدا یک سوره و سپس مترجم موردنظر خود را انتخاب کنید.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- جستجوی آیه -->
+
+        <section class="verse-search-section">
+
+            <div class="section-heading">
+
+                <span>
+                    جستجو
+                </span>
+
+                <h2>
+                    جستجوی آیه
+                </h2>
+
+                <p>
+                    یک کلمه یا عبارت وارد کنید.
+                </p>
+
+            </div>
+
+
+            <div class="verse-search-box">
+
+                <input
+                    id="verseSearch"
+                    type="search"
+                    placeholder="مثلاً: رحمت، ایمان، خدا...">
+
+
+                <button
+                    id="verseSearchButton"
+                    type="button">
+
+                    جستجو
+
+                </button>
+
+            </div>
+
+
+            <div
+                class="verse-results"
+                id="verseResults">
+
+            </div>
+
+        </section>
+
+
+        <!-- نشان‌شده‌ها -->
+
+        <section
+            class="bookmarks-section"
+            id="bookmarks">
+
+            <div class="section-heading">
+
+                <span>
+                    ذخیره‌شده
+                </span>
+
+                <h2>
+                    آیات نشان‌شده
+                </h2>
+
+                <p>
+                    آیات موردعلاقه خود را اینجا ذخیره کنید.
+                </p>
+
+            </div>
+
+
+            <div
+                class="bookmark-list"
+                id="bookmarkList">
+
+                <div class="empty-bookmark">
+
+                    هنوز آیه‌ای نشان‌گذاری نشده است.
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- پخش‌کننده صوت -->
+
+    <div
+        class="audio-player"
+        id="audioPlayer">
+
+        <div class="audio-info">
+
+            <span>
+                🎧
+            </span>
+
+            <div>
+
+                <strong id="audioSurahName">
+
+                    تلاوت قرآن کریم
+
+                </strong>
+
+                <small id="audioReciterName">
+
+                    قاری را انتخاب کنید
+
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <audio
+            id="quranAudio"
+            controls>
+
+        </audio>
+
+
+        <button
+            id="closeAudioButton"
+            type="button"
+            aria-label="بستن پخش‌کننده">
+
+            ×
+
+        </button>
+
     </div>
 
-    <button id="darkModeBtn" class="icon-btn">🌙</button>
-</header>
 
-<main class="container">
+    <!-- پیام -->
 
-    <section class="controls">
+    <div
+        class="toast"
+        id="toast">
 
-        <div class="control">
-            <label for="surahSelect">سوره</label>
-            <select id="surahSelect">
-                <option value="">در حال دریافت سوره‌ها...</option>
-            </select>
-        </div>
-
-        <div class="control">
-            <label for="reciterSelect">قاری</label>
-            <select id="reciterSelect">
-
-                <option value="ar.alafasy">
-                    مشاری راشد العفاسی
-                </option>
-
-                <option value="ar.abdulbasitmurattal">
-                    عبدالباسط عبدالصمد
-                </option>
-
-                <option value="ar.husary">
-                    محمود خلیل الحصری
-                </option>
-
-                <option value="ar.minshawi">
-                    محمد صدیق المنشاوی
-                </option>
-
-                <option value="ar.muhammadayyoub">
-                    محمد ایوب
-                </option>
-
-                <option value="ar.mahermuaiqly">
-                    ماهر المعيقلي
-                </option>
-
-                <option value="ar.saadsheqam">
-                    سعد الغامدی
-                </option>
-
-                <option value="ar.abdurrahmaansudais">
-                    عبدالرحمن السدیس
-                </option>
-
-                <option value="ar.yasserdossary">
-                    یاسر الدوسری
-                </option>
-
-            </select>
-        </div>
-
-        <div class="control">
-            <label for="translationSelect">ترجمه</label>
-
-            <select id="translationSelect">
-
-                <option value="fa.makarem">
-                    مکارم شیرازی
-                </option>
-
-                <option value="fa.fooladvand">
-                    فولادوند
-                </option>
-
-                <option value="fa.ansarian">
-                    انصاریان
-                </option>
-
-                <option value="fa.ayati">
-                    آیتی
-                </option>
-
-            </select>
-        </div>
-
-    </section>
+    </div>
 
 
-    <section class="search-box">
+    <!-- فوتر -->
 
-        <input
-            id="searchInput"
-            type="search"
-            placeholder="جستجو در متن آیات..."
-        >
+    <footer>
 
-        <button id="searchBtn">
-            🔎 جستجو
-        </button>
+        <div class="footer-logo">
 
-    </section>
+            <div>
+                ق
+            </div>
 
-
-    <section class="player">
-
-        <div class="player-info">
-            <strong id="playerTitle">
-                آماده پخش
+            <strong>
+                قرآن کریم
             </strong>
 
-            <span id="playerStatus">
-                یک سوره را انتخاب کنید
-            </span>
         </div>
 
-        <audio id="audioPlayer" controls preload="none"></audio>
 
-        <div class="player-buttons">
-
-            <button id="prevBtn">
-                ⏮ آیه قبل
-            </button>
-
-            <button id="playSurahBtn" class="main-btn">
-                ▶ پخش کل سوره
-            </button>
-
-            <button id="nextBtn">
-                آیه بعد ⏭
-            </button>
-
-        </div>
-
-        <button id="stopBtn" class="stop-btn">
-            ⏹ توقف
-        </button>
-
-    </section>
-
-
-    <section class="surah-header">
-
-        <h2 id="surahName">
-            قرآن کریم
-        </h2>
-
-        <p id="surahInfo">
-            سوره‌ای را انتخاب کنید
+        <p>
+            «إِنَّ هَٰذَا الْقُرْآنَ يَهْدِي لِلَّتِي هِيَ أَقْوَمُ»
         </p>
 
-    </section>
+
+        <p class="copyright">
+
+            © ۲۰۲۶ تمامی حقوق محفوظ است.
+        </p>
+
+    </footer>
 
 
-    <section id="ayahContainer" class="ayah-container">
+    <!-- فایل JavaScript -->
 
-        <div class="loading">
-            برای شروع، یک سوره را انتخاب کنید.
-        </div>
-
-    </section>
-
-</main>
-
-
-<footer>
-
-    <p>
-        قرآن کریم | طراحی شده برای مطالعه و تلاوت
-    </p>
-
-    <p class="small">
-        اطلاعات قرآن از سرویس عمومی Al Quran Cloud دریافت می‌شود.
-    </p>
-
-</footer>
-
-
-<script src="script.js"></script>
+    <script src="201.js"></script>
 
 </body>
 </html>
