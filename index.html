@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>قرآن کریم | تلاوت و تدبر</title>
+    <title>قرآن کریم | تلاوت، ترجمه و جستجو</title>
 
     <meta
         name="description"
-        content="قرآن کریم با تلاوت، ترجمه فارسی، جستجوی عربی و فارسی، انتخاب قاری و نشان‌گذاری آیات."
+        content="قرآن کریم با امکان جستجوی سوره و آیه، ترجمه، صوت قاری، نشانه‌گذاری و ادامه مطالعه."
     >
 
     <link rel="stylesheet" href="200.css">
@@ -25,20 +26,24 @@
 
     <div class="header-inner">
 
-        <a href="#home" class="brand">
+        <a href="#" class="brand">
             <span class="brand-icon">☾</span>
 
-            <span>
+            <div>
                 <strong>قرآن کریم</strong>
-                <small>تلاوت و تدبر</small>
-            </span>
+                <small>قرائت و تدبر</small>
+            </div>
         </a>
 
-        <nav id="nav" class="nav">
+
+        <nav class="nav">
+
             <a href="#home">خانه</a>
             <a href="#surahs">سوره‌ها</a>
             <a href="#bookmarks">نشان‌شده‌ها</a>
+
         </nav>
+
 
         <div class="header-actions">
 
@@ -46,18 +51,20 @@
                 id="themeButton"
                 class="icon-button"
                 type="button"
-                aria-label="تغییر حالت شب"
-            >
+                aria-label="تغییر حالت شب">
+
                 🌙
+
             </button>
 
             <button
                 id="menuButton"
-                class="icon-button menu-button"
+                class="menu-button"
                 type="button"
-                aria-label="منوی سایت"
-            >
+                aria-label="منو">
+
                 ☰
+
             </button>
 
         </div>
@@ -69,80 +76,58 @@
 
 <main>
 
-<section id="home" class="hero">
+<!-- ================= HERO ================= -->
 
-    <div class="hero-orb orb-one"></div>
-    <div class="hero-orb orb-two"></div>
+<section class="hero" id="home">
 
     <div class="hero-content">
 
         <span class="hero-badge">
-            بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيمِ
+            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
         </span>
 
-        <h1>قرآن کریم</h1>
+        <h1>
+            قرآن کریم
+        </h1>
 
         <p>
-            بخوان، گوش بده، جستجو کن و با کلام خدا همراه باش.
+            بخوان، گوش بده، جستجو کن و با آیات قرآن همراه باش.
         </p>
+
 
         <div class="search-box">
 
-            <span>⌕</span>
+            <span>🔎</span>
 
             <input
                 id="searchInput"
                 type="search"
-                placeholder="نام یا شماره سوره..."
+                placeholder="نام سوره یا شماره آیه را جستجو کنید..."
                 autocomplete="off"
             >
 
         </div>
+
 
         <div class="quick-actions">
 
             <button
                 id="continueButton"
                 class="quick-button primary"
-                type="button"
-            >
+                type="button">
+
                 ▶ ادامه مطالعه
+
             </button>
 
             <button
                 id="randomButton"
                 class="quick-button"
-                type="button"
-            >
+                type="button">
+
                 ✨ آیه تصادفی
+
             </button>
-
-            <button
-                id="openSearchButton"
-                class="quick-button"
-                type="button"
-            >
-                🔎 جستجوی آیه
-            </button>
-
-        </div>
-
-        <div class="hero-stats">
-
-            <div>
-                <strong>۱۱۴</strong>
-                <span>سوره</span>
-            </div>
-
-            <div>
-                <strong>۶۲۳۶</strong>
-                <span>آیه</span>
-            </div>
-
-            <div>
-                <strong>۳۰</strong>
-                <span>جزء</span>
-            </div>
 
         </div>
 
@@ -151,71 +136,113 @@
 </section>
 
 
-<section id="surahs" class="section">
+<!-- ================= SURAH LIST ================= -->
+
+<section
+    class="section"
+    id="surahs">
 
     <div class="section-heading">
 
         <div>
-            <span class="section-label">قرآن کریم</span>
-            <h2>فهرست سوره‌ها</h2>
+
+            <span class="section-label">
+                قرآن کریم
+            </span>
+
+            <h2>
+                فهرست سوره‌ها
+            </h2>
+
         </div>
 
-        <span id="surahCount" class="result-count">
-            در حال بارگذاری
+        <span
+            id="surahCount"
+            class="result-count">
+            ۱۱۴ سوره
         </span>
 
     </div>
 
-    <div id="surahGrid" class="surah-grid"></div>
 
-    <div id="noResults" class="empty-message hidden">
-        <div class="empty-icon">🔎</div>
-        <h3>چیزی پیدا نشد</h3>
-        <p>نام، شماره یا نام عربی سوره را بررسی کنید.</p>
+    <div
+        id="surahGrid"
+        class="surah-grid">
+
+    </div>
+
+
+    <div
+        id="noResults"
+        class="no-results hidden">
+
+        <div>🔎</div>
+
+        <h3>
+            چیزی پیدا نشد
+        </h3>
+
+        <p>
+            نام یا شماره سوره را بررسی کنید.
+        </p>
+
     </div>
 
 </section>
 
 
-<section id="bookmarks" class="section">
+<!-- ================= BOOKMARKS ================= -->
+
+<section
+    class="section bookmarks-section"
+    id="bookmarks">
 
     <div class="section-heading">
 
         <div>
-            <span class="section-label">ذخیره‌ها</span>
-            <h2>آیات نشان‌شده</h2>
-        </div>
 
-        <button
-            id="clearBookmarks"
-            class="text-button"
-            type="button"
-        >
-            حذف همه
-        </button>
+            <span class="section-label">
+                ذخیره‌ها
+            </span>
+
+            <h2>
+                آیات نشان‌شده
+            </h2>
+
+        </div>
 
     </div>
 
-    <div id="bookmarkList" class="bookmark-list"></div>
+
+    <div
+        id="bookmarkList"
+        class="bookmark-list">
+
+    </div>
 
 </section>
+
 
 </main>
 
 
-<!-- SURAH MODAL -->
+<!-- ================= SURAH MODAL ================= -->
 
-<div id="surahModal" class="modal">
+<div
+    id="surahModal"
+    class="modal">
 
     <div class="modal-box surah-modal-box">
 
         <button
             id="closeSurah"
             class="close-button"
-            type="button"
-        >
+            type="button">
+
             ×
+
         </button>
+
 
         <div class="surah-header">
 
@@ -223,92 +250,53 @@
 
                 <span
                     id="modalSurahNumber"
-                    class="surah-number-large"
-                >
+                    class="surah-number-large">
                     ۱
                 </span>
 
                 <div>
-                    <h2 id="modalSurahName">سوره</h2>
-                    <p id="modalSurahInfo">در حال بارگذاری...</p>
+
+                    <h2 id="modalSurahName">
+                        سوره
+                    </h2>
+
+                    <p id="modalSurahInfo">
+                        در حال بارگذاری...
+                    </p>
+
                 </div>
 
             </div>
 
+
             <div class="surah-tools">
 
-                <label>
-                    <span>مترجم</span>
+                <select
+                    id="translationSelect"
+                    aria-label="انتخاب مترجم">
 
-                    <select id="translationSelect">
-                        <option value="loading">
-                            در حال دریافت...
-                        </option>
-                    </select>
-                </label>
+                    <option value="">
+                        بدون ترجمه
+                    </option>
 
-                <label>
-                    <span>قاری</span>
+                    <option value="fa.makarem">
+                        ترجمه مکارم شیرازی
+                    </option>
 
-                    <select id="reciterSelect">
-                        <option value="loading">
-                            در حال دریافت...
-                        </option>
-                    </select>
-                </label>
+                    <option value="fa.ansarian">
+                        ترجمه حسین انصاریان
+                    </option>
 
-            </div>
+                </select>
 
-        </div>
-
-
-        <div class="audio-panel">
-
-            <div class="audio-panel-info">
-
-                <strong>تلاوت سوره</strong>
-
-                <span id="audioStatus">
-                    برای شروع، دکمه پخش را بزنید.
-                </span>
-
-            </div>
-
-            <div class="audio-controls">
-
-                <button
-                    id="previousAyahButton"
-                    class="audio-control"
-                    type="button"
-                    title="آیه قبل"
-                >
-                    ⏮
-                </button>
 
                 <button
                     id="surahAudioButton"
-                    class="audio-main-button"
-                    type="button"
-                >
-                    ▶ پخش
-                </button>
+                    class="audio-button"
+                    type="button">
 
-                <button
-                    id="stopAudioButton"
-                    class="audio-control stop"
-                    type="button"
-                    title="توقف"
-                >
-                    ■
-                </button>
+                    🎧 پخش سوره
 
-                <button
-                    id="nextAyahButton"
-                    class="audio-control"
-                    type="button"
-                    title="آیه بعد"
-                >
-                    ⏭
                 </button>
 
             </div>
@@ -316,7 +304,9 @@
         </div>
 
 
-        <div id="surahLoading" class="loading">
+        <div
+            id="surahLoading"
+            class="loading">
 
             <div class="spinner"></div>
 
@@ -327,69 +317,48 @@
         </div>
 
 
-        <div id="ayahContainer" class="ayah-container"></div>
+        <div
+            id="ayahContainer"
+            class="ayah-container">
+
+        </div>
 
     </div>
 
 </div>
 
 
-<!-- SEARCH MODAL -->
+<!-- ================= AYAH SEARCH MODAL ================= -->
 
-<div id="searchModal" class="modal">
+<div
+    id="searchModal"
+    class="modal">
 
     <div class="modal-box search-modal-box">
 
         <button
             id="closeSearch"
             class="close-button"
-            type="button"
-        >
+            type="button">
+
             ×
+
         </button>
+
 
         <div class="modal-title">
 
             <span class="section-label">
-                جستجوی هوشمند
+                جستجو
             </span>
 
             <h2>
-                جستجوی آیات قرآن
+                نتایج جستجوی آیات
             </h2>
 
             <p>
-                عربی یا فارسی جستجو کنید. برای آدرس مستقیم از ۲:۲۵۵ استفاده کنید.
+                عبارت موردنظر خود را در قرآن پیدا کنید.
             </p>
-
-        </div>
-
-
-        <div class="search-tabs">
-
-            <button
-                class="search-tab active"
-                data-search="smart"
-                type="button"
-            >
-                همه
-            </button>
-
-            <button
-                class="search-tab"
-                data-search="arabic"
-                type="button"
-            >
-                عربی
-            </button>
-
-            <button
-                class="search-tab"
-                data-search="persian"
-                type="button"
-            >
-                فارسی
-            </button>
 
         </div>
 
@@ -399,76 +368,71 @@
             <input
                 id="ayahSearchInput"
                 type="search"
-                placeholder="مثلاً: صبر، رحمت، الله، ۲:۲۵۵"
-                autocomplete="off"
+                placeholder="مثلاً: الله، نماز، صبر..."
             >
 
             <button
                 id="ayahSearchButton"
-                type="button"
-            >
+                type="button">
+
                 جستجو
+
             </button>
 
-        </div>
-
-        <div
-            id="searchHint"
-            class="search-hint"
-        >
-            جستجوی فارسی در ترجمه انتخاب‌شده انجام می‌شود.
-        </div>
-
-
-        <div
-            id="searchLoading"
-            class="loading hidden"
-        >
-            <div class="spinner"></div>
-            <p>در حال جستجو...</p>
         </div>
 
 
         <div
             id="searchResults"
-            class="search-results"
-        ></div>
+            class="search-results">
+
+        </div>
 
     </div>
 
 </div>
 
 
-<!-- CONTINUE MODAL -->
+<!-- ================= CONTINUE MODAL ================= -->
 
-<div id="continueModal" class="modal">
+<div
+    id="continueModal"
+    class="modal">
 
     <div class="modal-box small-modal">
 
         <button
             id="closeContinue"
             class="close-button"
-            type="button"
-        >
+            type="button">
+
             ×
+
         </button>
+
 
         <div class="continue-icon">
             ▶
         </div>
 
-        <h2>ادامه مطالعه</h2>
+
+        <h2>
+            ادامه مطالعه
+        </h2>
+
 
         <p id="continueText">
-            هنوز مطالعه‌ای ذخیره نشده است.
+            آخرین آیه‌ای ذخیره نشده است.
         </p>
+
 
         <button
             id="openContinue"
             class="main-button"
-            type="button"
-        >
-            باز کردن
+            type="button">
+
+            باز کردن آیه
+
         </button>
 
     </div>
@@ -476,9 +440,14 @@
 </div>
 
 
-<div id="toast" class="toast"></div>
+<!-- ================= TOAST ================= -->
 
-<audio id="quranAudio" preload="none"></audio>
+<div
+    id="toast"
+    class="toast">
+
+</div>
+
 
 <script src="201.js"></script>
 
